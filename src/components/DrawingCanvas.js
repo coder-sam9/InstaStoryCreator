@@ -1,4 +1,3 @@
-// components/DrawingCanvas.js
 import React, { useState } from 'react';
 import { StyleSheet, View, PanResponder } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
@@ -6,7 +5,7 @@ import Svg, { Path } from 'react-native-svg';
 export default function DrawingCanvas({ width, height, onLineDrawn }) {
   const [currentPath, setCurrentPath] = useState('');
   const [paths, setPaths] = useState([]);
-  const [currentColor] = useState('#FF0000'); // Default color - red
+  const [currentColor] = useState('#FF0000');
   const [currentStrokeWidth] = useState(5);
 
   const panResponder = PanResponder.create({

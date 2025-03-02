@@ -1,19 +1,24 @@
 {
-  "name": "interactivephotocanvas",
+  "name": "InteractivePhotoCanvas",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/native": "^7.0.14",
     "@react-navigation/stack": "^7.1.1",
+    "eas-cli": "^15.0.12",
     "expo": "~52.0.37",
     "expo-camera": "~16.0.17",
+    "expo-dev-client": "~5.0.12",
+    "expo-file-system": "~18.0.11",
+    "expo-intent-launcher": "~12.0.2",
+    "expo-linking": "~7.0.5",
     "expo-media-library": "^17.0.6",
     "expo-sharing": "^13.0.1",
     "expo-status-bar": "~2.0.1",
@@ -24,10 +29,7 @@
     "react-native-safe-area-context": "^4.12.0",
     "react-native-screens": "~4.4.0",
     "react-native-svg": "^15.8.0",
-    "react-native-view-shot": "~4.0.3",
-    "expo-linking": "~7.0.5",
-    "expo-file-system": "~18.0.11",
-    "expo-intent-launcher": "~12.0.2"
+    "react-native-view-shot": "~4.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

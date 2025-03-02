@@ -1,4 +1,3 @@
-// screens/CameraScreen.js
 import React, { useState, useRef, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Alert } from 'react-native';
 import { CameraView } from 'expo-camera';
@@ -9,12 +8,12 @@ export default function CameraScreen({ navigation }) {
   const [cameraType, setCameraType] = useState('back');
   const cameraRef = useRef(null);
 
-//   useEffect(() => {
-//     (async () => {
-//       const { status } = await CameraView.requestCameraPermissionsAsync();
-//       setHasPermission(status === 'granted');
-//     })();
-//   }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const { status } = await CameraView.requestCameraPermissionsAsync();
+  //     setHasPermission(status === 'granted');
+  //   })();
+  // }, []);
 
 
   const takePicture = async () => {
@@ -59,14 +58,14 @@ export default function CameraScreen({ navigation }) {
       >
         <View style={styles.controls}>
           <TouchableOpacity 
-            style={styles.flipButton} 
+            style={styles.captureButton} 
             onPress={toggleCameraType}
           >
             <Text style={styles.flipText}>Flip</Text>
           </TouchableOpacity>
           
           <TouchableOpacity 
-            style={styles.captureButton}
+            style={styles.flipButton}
             onPress={takePicture}
           >
             <View style={styles.captureInner} />

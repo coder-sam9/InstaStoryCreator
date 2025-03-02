@@ -1,9 +1,7 @@
-// components/StickerSelector.js
 import React from 'react';
 import { StyleSheet, View, ScrollView, Image, TouchableOpacity, Text } from 'react-native';
 
 export default function StickerSelector({ onSelect, onClose }) {
-  // Import stickers - this would be dynamically loaded from your sticker library
   const stickers = [
     require('../assets/stickers/sticker1.png'),
     require('../assets/stickers/sticker2.png'),

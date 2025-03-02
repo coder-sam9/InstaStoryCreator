@@ -16,19 +16,35 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.sami.InteractivePhotoCanvas",
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.sami.interactivephotocanvas",
-      "providers": [
+      "intentFilters": [
         {
-          "name": "androidx.core.content.FileProvider",
-          "authorities": "${com.sami.interactivephotocanvas}.fileprovider",
-          "grantUriPermissions": true,
-          "exported": false,
-          "path": "xml/file_paths.xml"
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "instagram-stories"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
         }
+      ],
+      "queries": [
+        {
+          "package": "com.instagram.android"
+        }
+      ],
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
       ]
     },
     "web": {
@@ -38,18 +54,22 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Allow $(InstaStoryEdit) to access your camera"
+          "cameraPermission": "Allow InstaStoryEdit to access your camera"
         }
       ],
       [
         "expo-media-library",
         {
-          "photosPermission": "Allow $(InstaStoryEdit) to access your photos",
-          "savePhotosPermission": "Allow $(InstaStoryEdit) to save photos"
+          "photosPermission": "Allow InstaStoryEdit to access your photos",
+          "savePhotosPermission": "Allow InstaStoryEdit to save photos"
         }
-      ],
-      "expo-file-system",
-      "expo-intent-launcher"
-    ]
+      ]
+  
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "c42816b1-b362-4ff1-afa5-416682175d89"
+      }
+    }
   }
 }

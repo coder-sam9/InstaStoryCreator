@@ -1,4 +1,3 @@
-// screens/CanvasScreen.js
 import React, { useState, useRef } from 'react';
 import { 
   StyleSheet, 
@@ -56,47 +55,44 @@ export default function CanvasScreen({ route, navigation }) {
   };
 
   // Share to Instagram Stories
-  
+
   const shareToInstagram = async () => {
     try {
-      const { status } = await MediaLibrary.requestPermissionsAsync();
-      if (status !== 'granted') {
-        Alert.alert('Permission Needed', 'We need permission to save the image');
-        return;
-      }
-  
+      // 1. Capture image
       const uri = await viewShotRef.current.capture();
       
-      // Convert to file:// URI for Android
-      const fileName = `share-${Date.now()}.jpg`;
-      const fileUri = FileSystem.cacheDirectory + fileName;
-      await FileSystem.copyAsync({ from: uri, to: fileUri });
-  
-      if (Platform.OS === 'android') {
-        try {
-          // Convert content:// to file://
-          const fileName = `share-${Date.now()}.jpg`;
-          const fileUri = FileSystem.cacheDirectory + fileName;
-          await FileSystem.copyAsync({ from: uri, to: fileUri });
+      // 2. Prepare image file
+      const preparedUri = await FileSystem.getContentUriAsync(uri);
       
-          await IntentLauncher.startActivityAsync(
-            'com.instagram.share.ADD_TO_STORY',
-            {
-              type: 'image/*',
-              data: fileUri,
-              flags: 1, // FLAG_GRANT_READ_URI_PERMISSION
-            }
-          );
-        } catch (error) {
-          // Fallback to general share
-          await Sharing.shareAsync(fileUri);
+      // 3. Platform-specific sharing
+      if (Platform.OS === 'ios') {
+        const instagramUrl = `instagram-stories://share?source_application=com.sami.InteractivePhotoCanvas&backgroundImage=${encodeURIComponent(preparedUri)}`;
+        
+        const canOpen = await Linking.canOpenURL(instagramUrl);
+        if (canOpen) {
+          await Linking.openURL(instagramUrl);
+        } else {
+          await Sharing.shareAsync(preparedUri);
         }
       } else {
-        // iOS code remains the same
+        // Android Intent
+        try {
+          console.log('Sharing URI:', preparedUri);
+          await IntentLauncher.startActivityAsync('com.instagram.share.ADD_TO_STORY', {
+            data: preparedUri,
+            type: 'image/jpeg',
+            flags: 1, 
+            packageName: 'com.instagram.android'
+          });
+        } catch (error) {
+          // Fallback to system share
+          await Sharing.shareAsync(preparedUri);
+          Alert.alert('Open Instagram to create a story');
+        }
       }
     } catch (error) {
-      console.error(error);
-      Alert.alert('Error', 'Failed to share to Instagram');
+      console.error('Sharing failed:', error);
+      Alert.alert('Error sharing to Instagram Stories');
     }
   };
 
@@ -109,16 +105,15 @@ export default function CanvasScreen({ route, navigation }) {
     <View style={styles.container}>
       <StatusBar style="light" />
       
-      {/* ViewShot captures the entire edited image */}
       <ViewShot 
         ref={viewShotRef}
         style={styles.viewShot}
         options={{ format: 'jpg', quality: 0.9 }}
       >
-        {/* Original photo */}
+
         <Image source={{ uri: photoUri }} style={styles.photo} />
         
-        {/* Drawing canvas layer */}
+
         {isDrawingMode && (
           <DrawingCanvas 
             width={width} 
@@ -126,7 +121,6 @@ export default function CanvasScreen({ route, navigation }) {
           />
         )}
         
-        {/* Stickers layer */}
         {stickers.map((sticker) => (
           <StickerItem
             key={sticker.id}
