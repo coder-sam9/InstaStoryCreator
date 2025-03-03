@@ -1,9 +1,8 @@
-// App.js
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import CameraScreen from './src/screens/CameraScreen';
-import CanvasScreen from './src/screens/CanvasScreen';
+import CameraScreen from './src/screens/camera/CameraScreen';
+import CanvasScreen from './src/screens/canvas/CanvasScreen';
 
 const Stack = createStackNavigator();
 

@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Alert } from 'react-native';
 import { CameraView } from 'expo-camera';
 import { StatusBar } from 'expo-status-bar';
+import styles from './styles';
 
 export default function CameraScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState('granted');

@@ -16,11 +16,12 @@ import * as Sharing from 'expo-sharing';
 import * as Linking from 'expo-linking';
 import { StatusBar } from 'expo-status-bar';
 
-import DrawingCanvas from '../components/DrawingCanvas';
-import StickerSelector from '../components/StickerSelector';
-import StickerItem from '../components/StickerItem';
+import DrawingCanvas from '../../components/DrawingCanvas';
+import StickerSelector from '../../components/StickerSelector';
+import StickerItem from '../../components/StickerItem';
 import * as FileSystem from 'expo-file-system';
 import * as IntentLauncher from 'expo-intent-launcher';
+import styles from './styles';
 
 const { width, height } = Dimensions.get('window');
 

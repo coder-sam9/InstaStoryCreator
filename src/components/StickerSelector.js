@@ -5,7 +5,6 @@ export default function StickerSelector({ onSelect, onClose }) {
   const stickers = [
     require('../assets/stickers/sticker1.png'),
     require('../assets/stickers/sticker2.png'),
-    // Add more stickers as needed
   ];
 
   return (
